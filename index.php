@@ -1,12 +1,10 @@
 <?php 
 require_once 'core/init.php';
 
-//$user = DB::getInstance()->query("select * from users");
-$user = DB::getInstance()->get('users',array('username','=','deepak'));
+$user = DB::getInstance()->insert('users',array(
+	'username' =>'Indu',
+	'password' => 'password',
+	'salt' => 'salt'
+	));
 
-if(!$user->count()){
-	echo 'No user';
-}else{
-	echo $user->first()->username;
-	
-}
+//This will successfully insert the new record
