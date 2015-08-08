@@ -1,3 +1,11 @@
+<?php 
+require_once 'core/init.php';
+if(Input::exists()){
+	echo 'submitted';
+	//echo $_POST['username'] === Input::get('username');
+}
+?>
+
 <form action="" method="POST">
 	<div class="field">
 		<label for="username">Username</label>
@@ -13,7 +21,7 @@
 	</div>
 	<div class="field">
 		<label for="name">Name</label>
-		<input type="text" name="name" id="name">	
+		<input type="text" name="name" id="name" value="">	
 	</div>
 	<input type="submit" value="Register">
 </form>
