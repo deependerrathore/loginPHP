@@ -37,7 +37,7 @@ if(Input::exists()){
 <form action="" method="POST">
 	<div class="field">
 		<label for="username">Username</label>
-		<input type="text" name="username" id="username" value="" autocomplete="off">	
+		<input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off">	
 	</div>
 	<div class="field">
 		<label for="password">Choose a password</label>
@@ -49,7 +49,7 @@ if(Input::exists()){
 	</div>
 	<div class="field">
 		<label for="name"> Your Name</label>
-		<input type="text" name="name" id="name" value="">	
+		<input type="text" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>">	
 	</div>
 	<input type="submit" value="Register">
 </form>
