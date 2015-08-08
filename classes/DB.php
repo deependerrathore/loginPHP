@@ -84,8 +84,27 @@ class DB{
 			
 			if(!$this->query($sql,$fields)->error()){
 				return true;
-				
+
 			}
+		}
+		return false;
+	}
+
+	public function update($table,$id,$fields){
+		$set= '';
+		$x = 1;
+		foreach ($fields as $name => $value) {
+			$set .= "{$name} = ?";
+			if($x < count($fields)){
+				$set .=', ';
+			}
+			$x++;
+		}
+		
+		$sql = "update {$table} set {$set} where id={$id}";
+
+		if(!$this->query($sql,$fields)->error()){
+			return true;
 		}
 		return false;
 	}
