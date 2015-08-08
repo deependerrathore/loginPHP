@@ -20,7 +20,7 @@ if(Input::exists()){
 			),
 		'name' => array(
 			'required' => true,
-			'min' => 2
+			'min' => 2,
 			'max'=>50
 			)
 		));
@@ -48,7 +48,7 @@ if(Input::exists()){
 		<input type="password" name="password_again" id="password_again">
 	</div>
 	<div class="field">
-		<label for="name">Name</label>
+		<label for="name"> Your Name</label>
 		<input type="text" name="name" id="name" value="">	
 	</div>
 	<input type="submit" value="Register">
