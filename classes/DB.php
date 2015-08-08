@@ -33,7 +33,10 @@ class DB{
 			}
 
 			if($this->_query->execute()){
-				echo "success";
+				$this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
+				$this->_count = $this->_query->rowCount();
+			}else{
+				$this->_error = true;
 			}
 		}
 	}
