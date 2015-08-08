@@ -26,9 +26,9 @@ if(Input::exists()){
 		));
 
 	if($validation->passed()){
-		//register user
+		echo 'passed';
 	}else{
-		//output errors
+		print_r($validation->errors());
 	}
 
 }
