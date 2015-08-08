@@ -17,8 +17,26 @@ class Validate{
 				
 				if($rule === 'required' && empty($value)){
 					$this->addError("{$item} is required");
-				}else{
+				}else if(!empty($value)){
+					switch ($rule) {
+						case 'min':
+							if(strlen($value) < $rule_value){
+								$this->addError("{$item} must be a minimum of {$rule_value} characters.");
+							}
+							break;
+						case 'min':
+							# code...
+							break;
+						case 'matches':
 
+							break;
+						case 'unique':
+
+							break;
+						default:
+							# code...
+							break;
+					}
 				}
 
 			}
