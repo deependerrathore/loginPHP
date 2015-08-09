@@ -1,35 +1,39 @@
 <?php 
 require_once 'core/init.php';
+
 if(Input::exists()){
 	//echo $_POST['username'] === Input::get('username');
-	$validate = new Validate();
-	$validation = $validate->check($_POST,array(
-		'username' => array(
-			'required' => true,
-			'min' => 2,
-			'max' => 20,
-			'unique' => 'users'
-			),
-		'password' => array(
-			'required' => true,
-			'min' => 5
-			),
-		'password_again' => array(
-			'required' => true,
-			'matches' => 'password'
-			),
-		'name' => array(
-			'required' => true,
-			'min' => 2,
-			'max'=>50
-			)
-		));
+	if(Token::check(Input::get('token'))){
+		//echo "I am not running"; if url is like this http://localhost/loginPHP/register.php?username=deepe
+		$validate = new Validate();
+		$validation = $validate->check($_POST,array(
+			'username' => array(
+				'required' => true,
+				'min' => 2,
+				'max' => 20,
+				'unique' => 'users'
+				),
+			'password' => array(
+				'required' => true,
+				'min' => 5
+				),
+			'password_again' => array(
+				'required' => true,
+				'matches' => 'password'
+				),
+			'name' => array(
+				'required' => true,
+				'min' => 2,
+				'max'=>50
+				)
+			));
 
-	if($validation->passed()){
-		echo 'passed';
-	}else{
-		foreach ($validation->errors() as $error) {
-			echo $error, '<br>';
+		if($validation->passed()){
+			echo 'passed';
+		}else{
+			foreach ($validation->errors() as $error) {
+				echo $error, '<br>';
+			}
 		}
 	}
 
@@ -53,5 +57,6 @@ if(Input::exists()){
 		<label for="name"> Your Name</label>
 		<input type="text" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>">	
 	</div>
+	<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 	<input type="submit" value="Register">
 </form>
