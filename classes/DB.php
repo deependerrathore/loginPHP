@@ -80,7 +80,7 @@ class DB{
 				$x++;
 			}
 
-			$sql = "Insert into users(`". implode('`,`', $keys)."`) values ({$values})";
+			$sql = "Insert into {$table}(`". implode('`,`', $keys)."`) values ({$values})";
 			
 			if(!$this->query($sql,$fields)->error()){
 				return true;
