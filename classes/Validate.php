@@ -9,7 +9,7 @@ class Validate{
 		$this->_db = DB::getInstance();
 	}
 
-	public function check($source , $items = array()){
+	public function check($source , $items = array()){ // $source = $_POST,$_GET
 		foreach ($items as $item => $rules) {
 			foreach ($rules as $rule => $rule_value) {
 				
