@@ -130,7 +130,7 @@
 		<div 
 		class="row" 
 		ng-repeat="item in items"
-		ng-class="{'done':item.done == 1}"
+		ng-class="{'done': item.done == 1}"
 		>
 			<div class="small-8 columns itemName">
 				<label for="item-{{ item.id }}">
@@ -142,6 +142,7 @@
 					ng-true-value="1"
 					ng-false-value="0"
 					ng-change="update(item)"
+					ng-checked="item.done == 1"
 					>
 					{{item.item}}
 				</label>

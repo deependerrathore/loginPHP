@@ -1,31 +1,21 @@
-<?php 
+<?php 	
 	
+	require_once 'core/init.php';
 	try{
 
-
-		if(empty($_POST['id'])){
-
+		if(!Input::exists()){
 			throw new PDOException('Invalid Request');
-
 		}
+		
 
-
-		$id = $_POST['id'];
+		$id = Input::get('id');
 		$done = empty($_POST['done']) ? 0 : 1;
 
+		$db = DB::getInstance();
 
-		$objDb = new PDO('sqlite:../dbase/shopping-list');
-		$objDb->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-		$sql = "UPDATE `items`
-		SET `done` = ?
-		WHERE `id` = ?";
-		$statement = $objDb->prepare($sql);
-
-		if(!$statement->execute(array($done,$id))){
-
-			throw new PDOException('The excute method fails');
-		}
+		$db->update('items',$id,array(
+			'done'=> $done)
+		);
 
 		
 		echo json_encode(array(
