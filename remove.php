@@ -17,7 +17,7 @@
 		$sql = "DELETE FROM `items`
 		WHERE `id` IN ({$placeholders})";
 
-		$db->query($sql,array());
+		$db->query($sql,$idsArray);
 
 		
 		echo json_encode(array(
