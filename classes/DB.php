@@ -5,7 +5,8 @@ class DB{
 			$_query ,
 			$_error =false,
 			$_results,
-			$_count = 0;
+			$_count = 0,
+			$_lastid ;
 	private function __construct(){
 		try{
 			$this->_pdo= new PDO('mysql:host='. Config::get('mysql/host').';dbname='. Config::get('mysql/db'), Config::get('mysql/username') , Config::get('mysql/password'));
@@ -24,6 +25,7 @@ class DB{
 	public function query($sql, $params = array()){
 		$this->_error = false;
 		if($this->_query = $this->_pdo->prepare($sql)){
+			
 			$x = 1;
 			if(count($params)){
 				foreach ($params as $param) {
@@ -35,6 +37,7 @@ class DB{
 			if($this->_query->execute()){
 				$this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
 				$this->_count = $this->_query->rowCount();
+				$this->_lastid = $this->_pdo->lastInsertId();
 			}else{
 				$this->_error = true;
 			}
@@ -119,5 +122,9 @@ class DB{
 	}
 	public function count(){
 		return $this->_count;
+	}
+
+	public function lastid(){
+		return $this->_lastid;
 	}
 }

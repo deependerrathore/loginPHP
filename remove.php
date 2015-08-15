@@ -1,30 +1,23 @@
 <?php 
-	
+	require_once 'core/init.php';
 	try{
 
-
-		if(empty($_POST['ids'])){
+		if(!Input::exists()){
 
 			throw new PDOException('Invalid Request');
 
 		}
 
-
-		$ids = $_POST['ids'];
+		$ids = Input::get('ids');
 		
 		$idsArray = explode('|',$ids);
 		$placeholders = implode(',', array_fill(0, count($idsArray), '?'));
-		$objDb = new PDO('sqlite:../dbase/shopping-list');
-		$objDb->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+		$db = DB::getInstance();
 
 		$sql = "DELETE FROM `items`
 		WHERE `id` IN ({$placeholders})";
-		$statement = $objDb->prepare($sql);
 
-		if(!$statement->execute($idsArray)){
-
-			throw new PDOException('The excute method fails');
-		}
+		$db->query($sql,array());
 
 		
 		echo json_encode(array(

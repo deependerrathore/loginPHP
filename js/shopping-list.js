@@ -22,10 +22,10 @@ angular.module('myApp',[])
 
 
 	.controller('shoppingListController',function($scope,$http,$log,helperFactory,MAX_LENGTH,MIN_LENGTH){
-		var urlInsert = 'mod/insert.php';
-		var urlSelect = 'mod/select.php';
-		var urlUpdate = 'mod/update.php';
-		var urlRemove = 'mod/remove.php';
+		var urlInsert = 'insert.php';
+		var urlSelect = 'select.php';
+		var urlUpdate = 'update.php';
+		var urlRemove = 'remove.php';
 
 		$scope.types = [];
 		$scope.items = [];
@@ -133,7 +133,9 @@ angular.module('myApp',[])
 					}
 				})
 				.error(function(data,status,headers,config){
+					alert(status);
 					throw new Error('Something went wrong with selecting records');
+
 				});
 		};
 

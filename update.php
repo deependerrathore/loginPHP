@@ -1,46 +1,43 @@
 <?php 
+	
+	try{
 
-require_once 'core/init.php';
 
-$user= new User();
+		if(empty($_POST['id'])){
 
-if(!$user->isLoggedIn()){
-	Redirect::to('index.php');
-}
-if(Input::exists()){
-	if(Token::check(Input::get('token'))){
+			throw new PDOException('Invalid Request');
 
-		$validate = new Validate();
-		$validation = $validate->check($_POST,array(
-			'name' => array(
-				'required' => true,
-				'min' => 2,
-				'max' => 50
-				)
-			));
-		if($validation->passed()){
-			try{
-				$user->update(array(
-					'name' => Input::get('name')
-					));
-				Session::flash('home','Your details have been updated.');
-				Redirect::to('index.php');
-			}catch(Exception $e){
-				die($e->getMessage());
-			}
-		}else{
-			foreach ($validation->errors() as $error) {
-				echo $error, '<br>';
-			}
 		}
+
+
+		$id = $_POST['id'];
+		$done = empty($_POST['done']) ? 0 : 1;
+
+
+		$objDb = new PDO('sqlite:../dbase/shopping-list');
+		$objDb->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+		$sql = "UPDATE `items`
+		SET `done` = ?
+		WHERE `id` = ?";
+		$statement = $objDb->prepare($sql);
+
+		if(!$statement->execute(array($done,$id))){
+
+			throw new PDOException('The excute method fails');
+		}
+
+		
+		echo json_encode(array(
+			'error' => false
+			
+			),JSON_HEX_TAG|JSON_HEX_APOS | JSON_HEX_QUOT |JSON_HEX_AMP);
+
+
+	}catch(PDOException $e){
+		echo json_encode(array(
+			'error' => true,
+			'message' => $e->getMessage()
+			),JSON_HEX_TAG|JSON_HEX_APOS | JSON_HEX_QUOT |JSON_HEX_AMP);
 	}
-}
-?>
-<form action="" method="POST">
-	<div class="field">
-		<label for="name">Name</label>
-		<input type="text" name="name" value="<?php echo escape($user->data()->name);?>">
-		<input type="submit" value="Update">
-		<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
-	</div>
-</form>
+ ?>

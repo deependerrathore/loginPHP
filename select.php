@@ -1,8 +1,10 @@
 <?php 
-	try{
+	
+	require_once 'core/init.php';
 
-		$objDb = new PDO('sqlite:../dbase/shopping-list');
-		$objDb->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+	$db = DB::getInstance();
+
+	try{
 
 		$sql = "SELECT 	`i`.*,
 		`t`.`name` AS `type_name`
@@ -11,28 +13,21 @@
 		ON `t`.`id` = `i`.`type` 
 		ORDER BY `i`.`date` ASC";
 
-		$result = $objDb->query($sql);
+		$result = $db->query($sql);
 
-		if(!$result){
-			throw new PDOException('The result return no object');
-		}
+		
 
-		$result->setFetchMode(PDO::FETCH_ASSOC);
-
-		$items = $result->fetchAll();
+		$items = $db->results();
 
 		$sql = "SELECT * 
 		FROM `types`
 		ORDER BY `id`";
 
-		$result = $objDb->query($sql);
-		if(!$result){
-			throw new PDOException('The result return no object');
-		}
+		$result = $db->query($sql);
+		
 
-		$result ->setFetchMode(PDO::FETCH_ASSOC);
 
-		$types = $result->fetchAll();
+		$types = $db->results();
 
 		echo json_encode(array(
 			'error' => false,
