@@ -60,24 +60,41 @@ if(Input::exists()){
 
 }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Log In</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width , intial-scale=1.0 , maximum-scale=1.0">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-<form action="" method="POST">
-	<div class="field">
-		<label for="username">Username</label>
-		<input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off">	
-	</div>
-	<div class="field">
-		<label for="password">Choose a password</label>
-		<input type="password" name="password" id="password">
-	</div>
-	<div class="field">
-		<label for="password again">Enter your password again</label>
-		<input type="password" name="password_again" id="password_again">
-	</div>
-	<div class="field">
-		<label for="name"> Your Name</label>
-		<input type="text" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>">	
-	</div>
-	<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
-	<input type="submit" value="Register">
-</form>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="css/foundation.min.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="css/app-screen.css" media="screen">
+	
+</head>
+<body id="register">
+
+	<form action="" method="POST">
+		<div class="field">
+			<label for="username">Username</label>
+			<input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off">	
+		</div>
+		<div class="field">
+			<label for="password">Choose a password</label>
+			<input type="password" name="password" id="password">
+		</div>
+		<div class="field">
+			<label for="password again">Enter your password again</label>
+			<input type="password" name="password_again" id="password_again">
+		</div>
+		<div class="field">
+			<label for="name"> Your Name</label>
+			<input type="text" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>">	
+		</div>
+		<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
+		<input type="submit" class="default" value="Register">
+	</form>
+</body>
+</html>
+	

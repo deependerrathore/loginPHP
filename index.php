@@ -26,6 +26,24 @@ if($user->isLoggedIn()){
 	<script type="text/javascript" src="js/shopping-list.js"></script>
 </head>
 <body ng-controller="shoppingListController">
+
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="index.php"><i class="fa fa-list">&nbsp</i>List Me</a></h1>
+    </li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="active"><a href="logout.php">Log Out</a></li>
+      <li class="active"><a href="register.php">Register</a></li>
+    </ul/>
+  </section>
+</nav>
+
+
 <div class="row">
 <div class="column">
 	<h1><?php echo escape($user->data()->name); ?> Shopping List</h1>

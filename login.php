@@ -28,20 +28,36 @@
 	}
 
  ?>
-<form action="" method="POST">
-	<div class="field">
-		<label for="username">Username</label>
-		<input type="text" name="username" id="username" autocomplete="off">
-	</div>
-	<div class="field">
-		<label for="password">Password</label>
-		<input type="password" name="password" id="password" autocomplete="off">
-	</div>
-	<div class="field">
-		<label for="remember">
-			<input type="checkbox" name="remember" id="remember">Remember me
-		</label>
-	</div>
-	<input type="hidden" name="token" value="<?php echo Token::generate();?>">
-	<input type="submit" value="Log in">
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Log In</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width , intial-scale=1.0 , maximum-scale=1.0">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="css/foundation.min.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="css/app-screen.css" media="screen">
+	
+</head>
+<body id="login">
+	<form action="" method="POST">
+		<div class="field">
+			<label for="username">Username</label>
+			<input type="text" name="username" id="username" autocomplete="off">
+		</div>
+		<div class="field">
+			<label for="password">Password</label>
+			<input type="password" name="password" id="password" autocomplete="off">
+		</div>
+		<div class="field">
+			<label for="remember">
+				<input type="checkbox" name="remember" id="remember">Remember me
+			</label>
+		</div>
+		<input type="hidden" name="token" value="<?php echo Token::generate();?>">
+		<input type="submit" class="button" value="Log in">
+	</form></body>
+</html>
+	
