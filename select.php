@@ -3,17 +3,18 @@
 	require_once 'core/init.php';
 
 	$db = DB::getInstance();
-
+	$userid = Session::get(Config::get('session/session_name'));
 	try{
 
 		$sql = "SELECT 	`i`.*,
 		`t`.`name` AS `type_name`
 		FROM `items` `i`
 		JOIN `types` `t`
-		ON `t`.`id` = `i`.`type` 
+		ON `t`.`id` = `i`.`type`
+		WHERE `i`.`userid` = ? 
 		ORDER BY `i`.`date` ASC";
 
-		$result = $db->query($sql);
+		$result = $db->query($sql,array($userid));
 
 		
 

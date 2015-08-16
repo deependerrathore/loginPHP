@@ -10,12 +10,13 @@
 		$item = Input::get('item');
 		$qty =  Input::get('qty');
 		$type = Input::get('type');
-
+		$userid = Session::get(Config::get('session/session_name'));
 		$db = DB::getInstance();	
 		$db->insert('items',array(
 			'item' => $item,
 			'qty' => $qty,
-			'type' => $type
+			'type' => $type,
+			'userid' => $userid
 			));
 		$id = $db->lastid();
 
@@ -24,9 +25,9 @@
 		FROM `items` `i`
 		JOIN `types` `t` 
 		ON `t`.`id` =`i`.`type`
-		WHERE `i`.`id` = ?";
+		WHERE `i`.`id` = ? AND `userid` = ?";
 
-		$db->query($sql,array($id));
+		$db->query($sql,array($id,$userid));
 		$item = $db->first();
 
 		header('Content-type: application/json');
