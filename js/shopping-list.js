@@ -24,7 +24,7 @@ angular.module('myApp',[])
 	.controller('shoppingListController',function($scope,$http,$log,helperFactory,MAX_LENGTH,MIN_LENGTH){
 		var urlInsert = 'insert.php';
 		var urlSelect = 'select.php';
-		var urlUpdate = 'update.php';
+		var urlUpdate = 'updatelist.php';
 		var urlRemove = 'remove.php';
 
 		$scope.types = [];
