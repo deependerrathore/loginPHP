@@ -21,7 +21,7 @@
 				}
 			}else{
 				foreach ($validation->errors() as $error) {
-					echo $error, '<br>';
+					echo '<label class="alert-box alert radius">'. $error . '</label><br>';
 				}
 			}
 		}
@@ -58,6 +58,9 @@
 		</div>
 		<input type="hidden" name="token" value="<?php echo Token::generate();?>">
 		<input type="submit" class="button" value="Log in">
-	</form></body>
+		<a href="register.php" class="button">Go for Registration</a>
+
+	</form>
+</body>
 </html>
 	

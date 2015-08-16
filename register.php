@@ -46,14 +46,14 @@ if(Input::exists()){
 
 					));
 				Session::flash('home','You have been registered and can now login!');
-				Redirect::to(404);
+				Redirect::to('login.php');
 
 			}catch(Expception $e){
 				die($e->getMessage());
 			}
 		}else{
 			foreach ($validation->errors() as $error) {
-				echo $error, '<br>';
+				echo '<label class="alert-box alert radius">'. $error . '</label><br>';
 			}
 		}
 	}
@@ -93,7 +93,8 @@ if(Input::exists()){
 			<input type="text" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>">	
 		</div>
 		<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
-		<input type="submit" class="default" value="Register">
+		<input type="submit" class="button" value="Register">
+		<a href="login.php" class="button">Go for LogIn</a>
 	</form>
 </body>
 </html>
